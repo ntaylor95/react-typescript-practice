@@ -50,8 +50,6 @@ const companySetup: Ticket = {
     const todaysDate: Date = new Date();
 
     const checkOverdue = (ticket:Ticket) => {
-        console.log(`My ticket is ${JSON.stringify(ticket)}`);
-        console.log(`the date is ${todaysDate.toISOString()}`);
         if (ticket.dateCreated < todaysDate) {
             myArr.push(ticket);
         }
@@ -68,11 +66,18 @@ const companySetup: Ticket = {
     }
 
     test(companySetup);
-    console.log('The my Array array is');
-    console.log(myArr);
+
+    const overdueTickets = myArr.map((ticket, i) => {
+        return (
+            <h4 key={i}>{`${ticket.title} is overdue`}</h4>
+        )
+    })
 
     return (
         <div ref={divRef}>
+            <div>
+                { overdueTickets }
+            </div>
             <h1>{title}</h1>
             <h2>{`The total number is books is ${count}`}</h2>
             <input ref={inputRef} onChange={handleChange} className="input-field text" type='text'></input>
